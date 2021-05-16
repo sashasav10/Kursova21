@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+\usepackage[T1, T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian, russian]{babel}
+\title{Course work}
+\author{Oleksandr Saveliev}
+\begin{document}
+\maketitle 
+\section{Таблиця істинності}
+\begin{tabular}{ | l | l | l | l | l | l |}
+\hline 
+a & b & c & $\overline{(  c )}$ & ( b $\land$ $\overline{(  c )}$ ) & ( a $\vee$ ( b $\land$ $\overline{(  c )}$ ) )  \\ \hline
+1 & 1 & 1 & 0 & 0 & 1  \\
+0 & 1 & 1 & 0 & 0 & 0  \\
+1 & 0 & 1 & 0 & 0 & 1  \\
+0 & 0 & 1 & 0 & 0 & 0  \\
+1 & 1 & 0 & 1 & 1 & 1  \\
+0 & 1 & 0 & 1 & 1 & 1  \\
+1 & 0 & 0 & 1 & 0 & 1  \\
+0 & 0 & 0 & 1 & 0 & 0  \\
+\hline
+\end{tabular}
+\section{ДКНФ}
+ ( $\overline{a}$ $\vee $ b $\vee $ c ) $\land$ ( $\overline{a}$ $\vee $ $\overline{b}$ $\vee $ c ) $\land$ ( $\overline{a}$ $\vee $ $\overline{b}$ $\vee $ $\overline{c}$ )
+\section{ДДНФ}
+ ( a $\land$ b $\land$ c ) $\vee $ ( a $\land$ $\overline{b}$ $\land$ c ) $\vee $ ( a $\land$ b $\land$ $\overline{c}$ ) $\vee $ ( $\overline{a}$ $\land$ b $\land$ $\overline{c}$ ) $\vee $ ( a $\land$ $\overline{b}$ $\land$ $\overline{c}$ )
+\end{document}
