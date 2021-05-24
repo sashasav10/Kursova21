@@ -1,0 +1,18 @@
+body{
+  margin: 20px 100px 20px 100px;
+  font-size: 1.2em; /* Размер текста */ 
+}
+div{
+  margin-top:10px;
+  line-height: 1.5em;
+}
+   sup,  sub {
+    font-style: normal; /* Нормальное начертание */
+    font-size: 0.6em; /* Размер индекса */
+    color: red; /* Цвет верхнего индекса */
+    vertical-align: 0.8em; /* Сдвигаем текст вверх */
+   }
+   sub {
+    color: blue; /* Цвет нижнего индекса */
+    vertical-align: -0.5em; /* Сдвигаем текст вниз */
+   }
