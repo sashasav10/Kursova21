@@ -1,19 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace TruthTableGen
 {
@@ -29,6 +20,7 @@ namespace TruthTableGen
 		{
 			try
 			{
+				//відображаємо кнопки, браузер та текстові поля
 				Pcnf.Visibility=Visibility.Visible;
 				Pdnf.Visibility=Visibility.Visible;
 				TruthTable.Visibility=Visibility.Visible;
@@ -38,6 +30,10 @@ namespace TruthTableGen
 				TTOpenInBrowser_Button.Visibility = Visibility.Visible;
 				PcnfOpenInBrowser_Button.Visibility = Visibility.Visible;
 				PdnfOpenInBrowser_Button.Visibility = Visibility.Visible;
+				TTSave_Button.Visibility = Visibility.Visible;
+				PcnfSave_Button.Visibility = Visibility.Visible;
+				PdnfSave_Button.Visibility = Visibility.Visible;
+
 				//Відформатування вхідного тексту, щоб змінити оператори
 				Query.Text = FormatInput(Query.Text);
 
@@ -165,43 +161,46 @@ namespace TruthTableGen
 			"\\usepackage{amsmath,amsthm,amssymb}" + Environment.NewLine +
 			"\\usepackage{mathtext}"
 			+ Environment.NewLine +
-"\\usepackage[T1, T2A]{fontenc}"
+			"\\usepackage[T1, T2A]{fontenc}"
 			+ Environment.NewLine +
-"\\usepackage[utf8]{inputenc}"
+			"\\usepackage[utf8]{inputenc}"
 			+ Environment.NewLine +
-"\\usepackage[english, ukrainian, russian]{babel}"
+			"\\usepackage[english, ukrainian, russian]{babel}"
 			+ Environment.NewLine +
-"\\title{Course work}"
+			"\\title{Course work}"
 			+ Environment.NewLine +
-"\\author{Oleksandr Saveliev}"
+			"\\author{Oleksandr Saveliev}"
 			+ Environment.NewLine + "\\begin{document}"
 			+ Environment.NewLine +
-
-"\\maketitle " + Environment.NewLine +
-"\\section{Таблиця істинності}"
+			"\\maketitle " + Environment.NewLine +
+			"\\section{Таблиця істинності}"
 			+ Environment.NewLine + evaluatorLa.EvaluateQuery() + Environment.NewLine +
-"\\section{ДКНФ}"
+			"\\section{ДКНФ}"
 			+ Environment.NewLine + evaluatorLa.FindPCNF() + Environment.NewLine +
 			"\\section{ДДНФ}"
 			+ Environment.NewLine + evaluatorLa.FindPDNF() + Environment.NewLine +
-"\\end{document}");
+			"\\end{document}");
 			stream4.Close();
 
-			string filename = "wwwroot\\temp.tex";
-			Process p1 = new Process();
-			p1.StartInfo.FileName = "C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\pdflatex.exe";
-			p1.StartInfo.Arguments = filename;
-			p1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-			p1.StartInfo.RedirectStandardOutput = true;
-			p1.StartInfo.UseShellExecute = false;
+				string filename = "wwwroot\\temp.tex";
+				Process p1 = new Process();
+				p1.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory+"wwwroot\\pdflatex.exe";
+				p1.StartInfo.Arguments = filename;
+				p1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+				p1.StartInfo.RedirectStandardOutput = true;
+				p1.StartInfo.UseShellExecute = false;
 
-			p1.Start();
-			var output = p1.StandardOutput.ReadToEnd();
-			p1.WaitForExit();
-			p1.Close();
-			pdf_WB.Visibility = Visibility.Visible;
-			pdf_WB.Navigate(AppDomain.CurrentDomain.BaseDirectory + "temp.pdf");
-			OpenOutsideProgram_Button.IsEnabled = true;
+				p1.Start();
+				var output = p1.StandardOutput.ReadToEnd();
+				p1.WaitForExit();
+				p1.Close();
+				p1 = null;
+				pdf_WB.Visibility = Visibility.Visible;
+				pdf_WB.Navigate(AppDomain.CurrentDomain.BaseDirectory + "temp.pdf");
+				OpenOutsideProgram_Button.Visibility = Visibility.Visible;
+				texSave_Button.Visibility = Visibility.Visible;
+				pdfSave_Button.Visibility = Visibility.Visible;
+
 			}
 
 			catch
@@ -232,6 +231,66 @@ namespace TruthTableGen
 		private void PdnfOpenInBrowser_Button_Click(object sender, RoutedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\index3.html");
+		}
+
+		private void TTSave_Button_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfdTT = new SaveFileDialog();
+			sfdTT.Filter = "html files (*.html)|*.html|All files (*.*)|*.*";
+			sfdTT.FilterIndex = 1;
+			sfdTT.RestoreDirectory = true;
+			if (sfdTT.ShowDialog() == true)
+			{
+				File.Copy(AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\index1.html", sfdTT.FileName);
+			}
+		}
+
+		private void PcnfSave_Button_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfdPcnf = new SaveFileDialog();
+			sfdPcnf.Filter = "html files (*.html)|*.html|All files (*.*)|*.*";
+			sfdPcnf.FilterIndex = 1;
+			sfdPcnf.RestoreDirectory = true;
+			if (sfdPcnf.ShowDialog() == true)
+			{
+				File.Copy(AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\index2.html", sfdPcnf.FileName);
+			}
+		}
+
+		private void PdnfSave_Button_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfdPdnf = new SaveFileDialog();
+			sfdPdnf.Filter = "html files (*.html)|*.html|All files (*.*)|*.*";
+			sfdPdnf.FilterIndex = 1;
+			sfdPdnf.RestoreDirectory = true;
+			if (sfdPdnf.ShowDialog() == true)
+			{
+				File.Copy(AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\index3.html", sfdPdnf.FileName);
+			}
+		}
+
+		private void texSave_Button_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfdTex = new SaveFileDialog();
+			sfdTex.Filter = "tex files (*.tex)|*.tex|All files (*.*)|*.*";
+			sfdTex.FilterIndex = 1;
+			sfdTex.RestoreDirectory = true;
+			if (sfdTex.ShowDialog() == true)
+			{
+				File.Copy(AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\temp.tex", sfdTex.FileName);
+			}
+		}
+
+		private void pdfSave_Button_Click(object sender, RoutedEventArgs e)
+		{
+			SaveFileDialog sfdPdf = new SaveFileDialog();
+			sfdPdf.Filter = "pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
+			sfdPdf.FilterIndex = 1;
+			sfdPdf.RestoreDirectory = true;
+			if (sfdPdf.ShowDialog() == true)
+			{
+				File.Copy(AppDomain.CurrentDomain.BaseDirectory + "temp.pdf", sfdPdf.FileName);
+			}
 		}
 	}
 }

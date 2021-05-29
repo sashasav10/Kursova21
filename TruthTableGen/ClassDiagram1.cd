@@ -28,5 +28,12 @@
       <FileName>Evaluator.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TruthTableGen.Field">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

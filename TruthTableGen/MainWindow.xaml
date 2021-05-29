@@ -20,10 +20,11 @@
 					<Canvas HorizontalAlignment="Left" Height="110" Margin="10,345,0,0" VerticalAlignment="Top" Width="494"/>
 					<WebBrowser x:Name="WB_TruthTable" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" OpacityMask="Black" ScrollViewer.HorizontalScrollBarVisibility="Visible" Visibility="Hidden"/>
 					<Button x:Name="TTOpenInBrowser_Button" Content="Відкрити в браузері" HorizontalAlignment="Left" Height="20" Margin="10,300,0,0" VerticalAlignment="Top" Width="98" FontSize="10" Click="TTOpenInBrowser_Button_Click" Visibility="Hidden"/>
+					<Button x:Name="TTSave_Button" Content="Зберегти" HorizontalAlignment="Left" Height="20" Margin="113,300,0,0" VerticalAlignment="Top" Width="91" FontSize="10" Click="TTSave_Button_Click" Visibility="Hidden"/>
 				</Grid>
 			</TabItem>
-			<TabItem Header="ДКНФ" Height="23" VerticalAlignment="Top">
-				<Grid Background="#FFE5E5E5" Margin="0,-8,0,8">
+			<TabItem Header="ДКНФ" Height="26" VerticalAlignment="Bottom" Margin="0,0,-4,0">
+				<Grid Background="#FFE5E5E5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="178*"/>
 						<ColumnDefinition Width="Auto"/>
@@ -34,6 +35,7 @@
 					<Label Name="PcnfLabel" Content="ДКНФ" HorizontalAlignment="Left" FontSize="15" Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="515"/>
 					<WebBrowser x:Name="WB_Pcnf" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Visibility="Hidden"/>
 					<Button x:Name="PcnfOpenInBrowser_Button" Content="Відкрити в браузері" HorizontalAlignment="Left" Height="20" Margin="10,303,0,0" VerticalAlignment="Top" Width="97" FontSize="10" Click="PcnfOpenInBrowser_Button_Click" Visibility="Hidden"/>
+					<Button x:Name="PcnfSave_Button" Grid.ColumnSpan="3" Content="Зберегти" HorizontalAlignment="Left" Height="20" Margin="127,303,0,0" VerticalAlignment="Top" Width="83" FontSize="10" Click="PcnfSave_Button_Click" Visibility="Hidden"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="ДДНФ" Margin="0" RenderTransformOrigin="0.615,0.227">
@@ -49,20 +51,22 @@
 					<Label Name="PdnfLabel" Content="ДДНФ" HorizontalAlignment="Left" FontSize="15" Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="5" Width="515"/>
 					<WebBrowser x:Name="WB_Pdnf" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Grid.ColumnSpan="5" Visibility="Hidden"/>
 					<Button x:Name="PdnfOpenInBrowser_Button" Content="Відкрити в браузері" HorizontalAlignment="Left" Height="18" Margin="10,286,0,0" VerticalAlignment="Top" Width="100" FontSize="10" Click="PdnfOpenInBrowser_Button_Click" Visibility="Hidden"/>
+					<Button x:Name="PdnfSave_Button" Content="Зберегти" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="10,286,0,0" VerticalAlignment="Top" Width="77" Grid.ColumnSpan="3" FontSize="10" Click="PdnfSave_Button_Click" Visibility="Hidden"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="PDF Звіт">
 				<Grid Background="#FFE5E5E5" Margin="0,-1,0,1">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="169*"/>
-						<ColumnDefinition Width="48*"/>
-						<ColumnDefinition Width="14*"/>
-						<ColumnDefinition Width="41*"/>
-						<ColumnDefinition Width="253*"/>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="22*"/>
+						<ColumnDefinition Width="7*"/>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="36*"/>
 					</Grid.ColumnDefinitions>
-					<Button x:Name="CreatePdf_Button" Content="Сформувати" HorizontalAlignment="Left" Height="29" Margin="21,20,0,0" VerticalAlignment="Top" Width="83" Click="CreatePdf_Button_Click"/>
-					<WebBrowser x:Name="pdf_WB" Grid.ColumnSpan="5" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-					<Button x:Name="OpenOutsideProgram_Button" Content="Відкрити у зовнішній програмі" Grid.Column="4" HorizontalAlignment="Left" Height="28" Margin="25,21,0,0" VerticalAlignment="Top" Width="201" Click="OpenOutsideProgram_Button_Click" HorizontalContentAlignment="Left" IsEnabled="False">
+					<Button x:Name="CreatePdf_Button" Content="Сформувати" HorizontalAlignment="Left" Height="29" Margin="10,17,0,0" VerticalAlignment="Top" Width="83" Click="CreatePdf_Button_Click" Grid.Column="1"/>
+					<WebBrowser x:Name="pdf_WB" Margin="10,58,10,0" VerticalAlignment="Top" MinHeight="4" Grid.ColumnSpan="6" Visibility="Hidden"/>
+					<Button x:Name="OpenOutsideProgram_Button" Content="Відкрити у зовнішній програмі" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="77,17,0,0" VerticalAlignment="Top" Width="175" Click="OpenOutsideProgram_Button_Click" HorizontalContentAlignment="Left" FontSize="10" Visibility="Hidden">
 						<Button.OpacityMask>
 							<ImageBrush ImageSource="pdf_logo.png"/>
 						</Button.OpacityMask>
@@ -73,9 +77,11 @@
 							<ImageBrush ImageSource="pdf_logo.png"/>
 						</Button.BorderBrush>
 					</Button>
+					<Button x:Name="texSave_Button" Grid.ColumnSpan="4" Content="Зберегти у форматі tex" HorizontalAlignment="Left" Height="20" Margin="129,10,0,0" VerticalAlignment="Top" Width="120" Click="texSave_Button_Click" FontSize="10" Grid.Column="1" Visibility="Hidden"/>
+					<Button x:Name="pdfSave_Button" Grid.ColumnSpan="4" Content="Зберегти у форматі pdf" HorizontalAlignment="Left" Height="20" Margin="129,35,0,0" VerticalAlignment="Top" Width="120" FontSize="10" Grid.Column="1" Click="pdfSave_Button_Click" Visibility="Hidden"/>
 				</Grid>
 			</TabItem>
-			<TabItem Header="Вказівки" IsSelected="True" Margin="-1,-1,-3,0">
+			<TabItem Header="Вказівки" IsSelected="True" Margin="0,0,-4,0" Height="26" VerticalAlignment="Top">
 				<Grid Background="#FFE5E5E5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="26*"/>
